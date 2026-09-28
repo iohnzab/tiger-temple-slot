@@ -2,7 +2,9 @@
 
 A demo online slot on a made-up casino site ("Aurum Spins"), built to show how slot games work and how the house wins. It uses play-money credits only: no real money, no deposits, no prizes.
 
-Open `index.html` in a browser. There is nothing to install.
+**▶ Play it here: https://iohnzab.github.io/tiger-temple-slot/**
+
+Or open `index.html` in a browser. There is nothing to install.
 
 ## The game
 
