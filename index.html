@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurum Spins | Tiger Temple</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0714;
+    --bg-2: #140c24;
+    --panel: #1b1130;
+    --panel-2: #241640;
+    --line: #3a2660;
+    --text: #f4eefe;
+    --muted: #a898c7;
+    --gold: #ffc94d;
+    --gold-2: #ff9d1c;
+    --gold-deep: #b8741a;
+    --pink: #ff3d8b;
+    --green: #2fe39a;
+    --red: #ff5a6a;
+    --cellH: 110px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #3b1a6b55, transparent 60%),
+      radial-gradient(800px 500px at 100% 30%, #ff3d8b18, transparent 60%),
+      var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+
+  /* ---------- Top bar ---------- */
+  .demo-strip {
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold-2), var(--gold-deep));
+    color: #2a1600; font-size: 12px; font-weight: 700; text-align: center;
+    padding: 6px 16px; letter-spacing: .04em;
+  }
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: #0b0714cc; backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; gap: 24px; height: 68px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: "Cinzel", serif; font-weight: 900; font-size: 22px; letter-spacing: .06em; }
+  .logo-mark {
+    width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+    background: conic-gradient(from 200deg, var(--gold), var(--gold-2), var(--pink), var(--gold));
+    color: #1a0d00; font-size: 18px; box-shadow: 0 0 20px #ffc94d55;
+  }
+  .logo span { background: linear-gradient(180deg, #fff3c4, var(--gold) 55%, var(--gold-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .nav-links { display: flex; gap: 22px; font-size: 14px; font-weight: 600; color: var(--muted); }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  .wallet {
+    display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px;
+    background: var(--panel); border: 1px solid var(--line); font-weight: 700; font-variant-numeric: tabular-nums;
+  }
+  .wallet .coin { width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff6c8, var(--gold) 45%, var(--gold-deep)); box-shadow: inset 0 -2px 0 #0003; }
+  .btn-ghost { padding: 9px 14px; border-radius: 999px; background: transparent; color: var(--text); border: 1px solid var(--line); font-weight: 600; font-size: 13px; }
+  .btn-ghost:hover { border-color: var(--gold); }
+  .icon-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--panel); border: 1px solid var(--line); color: var(--text); font-size: 16px; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 36px 0 12px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center; }
+  .hero h1 { font-family: "Cinzel", serif; font-weight: 900; font-size: clamp(32px, 5vw, 56px); line-height: 1.05; letter-spacing: .01em; }
+  .hero h1 em { font-style: normal; background: linear-gradient(180deg, #fff3c4, var(--gold) 50%, var(--gold-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { color: var(--muted); margin-top: 14px; font-size: 16px; line-height: 1.6; max-width: 520px; }
+  .hero-cta { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+  .btn-gold {
+    padding: 14px 26px; border-radius: 999px; font-weight: 800; font-size: 15px; color: #2a1600;
+    background: linear-gradient(180deg, #ffe38a, var(--gold) 45%, var(--gold-2));
+    box-shadow: 0 8px 24px #ff9d1c44, inset 0 -3px 0 #0002;
+  }
+  .btn-gold:hover { filter: brightness(1.08); }
+  .jackpot {
+    background: linear-gradient(160deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--line); border-radius: 20px; padding: 22px; text-align: center; position: relative; overflow: hidden;
+  }
+  .jackpot::before { content: ""; position: absolute; inset: -40%; background: conic-gradient(from 0deg, transparent, #ffc94d22, transparent 30%); animation: rot 8s linear infinite; }
+  .jackpot > * { position: relative; }
+  .jackpot small { color: var(--muted); font-weight: 700; letter-spacing: .2em; font-size: 11px; }
+  .jackpot .amount { font-family: "Cinzel", serif; font-weight: 900; font-size: clamp(30px, 4.5vw, 46px); color: var(--gold); text-shadow: 0 0 24px #ffc94d66; font-variant-numeric: tabular-nums; margin: 6px 0; }
+  .jackpot .note { color: var(--muted); font-size: 12px; }
+  @keyframes rot { to { transform: rotate(360deg); } }
+
+  /* ---------- Machine ---------- */
+  .machine-section { padding: 18px 0 30px; }
+  .machine {
+    position: relative; border-radius: 28px; padding: 18px;
+    background: linear-gradient(180deg, #3a1f00, #1c0f00);
+    box-shadow: 0 0 0 2px var(--gold-deep), 0 0 0 6px #2a1600, 0 0 0 8px var(--gold-2), 0 30px 80px #000a, 0 0 120px #ff9d1c22;
+  }
+  .machine-title { text-align: center; margin-bottom: 12px; }
+  .machine-title h2 {
+    font-family: "Cinzel", serif; font-weight: 900; font-size: clamp(22px, 3.6vw, 34px); letter-spacing: .12em;
+    background: linear-gradient(180deg, #fff6d2, var(--gold) 50%, var(--gold-deep)); -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 2px 0 #000a);
+  }
+  .bulbs { display: flex; justify-content: center; gap: 10px; margin-top: 6px; }
+  .bulbs i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px var(--gold); animation: blink 1.2s infinite; }
+  .bulbs i:nth-child(even) { animation-delay: .6s; }
+  @keyframes blink { 50% { opacity: .25; box-shadow: none; } }
+
+  .fs-banner {
+    display: none; text-align: center; margin: 0 auto 10px; padding: 8px 16px; border-radius: 999px; width: fit-content;
+    background: linear-gradient(90deg, var(--pink), #9b3dff); font-weight: 800; letter-spacing: .06em; font-size: 14px;
+    box-shadow: 0 0 24px #ff3d8b77;
+  }
+  .machine.freespins .fs-banner { display: block; }
+  .machine.freespins { box-shadow: 0 0 0 2px var(--pink), 0 0 0 6px #2a0016, 0 0 0 8px #9b3dff, 0 30px 80px #000a, 0 0 140px #ff3d8b44; }
+
+  .reels-frame { position: relative; border-radius: 18px; padding: 10px; background: #0a0510; box-shadow: inset 0 0 0 2px #000, inset 0 0 40px #000; }
+  .reels { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .reel {
+    position: relative; height: calc(var(--cellH) * 3); overflow: hidden; border-radius: 12px;
+    background: linear-gradient(180deg, #1a1030, #2a1a48 50%, #1a1030);
+  }
+  .reel::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, #000a, transparent 18%, transparent 82%, #000a); }
+  .reel.anticipate { box-shadow: 0 0 0 2px var(--gold), 0 0 30px var(--gold); animation: pulse .4s infinite alternate; }
+  @keyframes pulse { to { box-shadow: 0 0 0 2px var(--gold-2), 0 0 50px var(--gold-2); } }
+  .strip { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
+  .strip.blur { filter: blur(2px) brightness(1.1); }
+  .cell { height: var(--cellH); display: grid; place-items: center; padding: 6px; }
+  .sym {
+    width: 100%; height: 100%; border-radius: 12px; display: grid; place-items: center;
+    font-size: calc(var(--cellH) * .52); line-height: 1; position: relative;
+    background: radial-gradient(circle at 50% 40%, var(--c, #ffffff22), transparent 70%);
+    transition: transform .2s;
+  }
+  .sym.wild { background: radial-gradient(circle at 50% 40%, #ff9d1c66, transparent 70%); }
+  .sym.wild::after { content: "WILD"; position: absolute; bottom: 6%; font: 900 calc(var(--cellH) * .12)/1 "Cinzel", serif; color: var(--gold); letter-spacing: .1em; text-shadow: 0 1px 0 #000, 0 0 8px #000; }
+  .sym.scatter { background: radial-gradient(circle at 50% 40%, #ff3d8b55, transparent 70%); }
+  .sym.scatter::after { content: "BONUS"; position: absolute; bottom: 6%; font: 900 calc(var(--cellH) * .11)/1 "Cinzel", serif; color: #ffd1e6; letter-spacing: .08em; text-shadow: 0 1px 0 #000, 0 0 8px #000; }
+  .sym.win { animation: symwin .6s ease-in-out infinite alternate; box-shadow: 0 0 0 3px var(--gold), 0 0 24px var(--gold); z-index: 2; }
+  .reels.has-win .sym:not(.win) { opacity: .35; filter: grayscale(.6); }
+  @keyframes symwin { from { transform: scale(1); } to { transform: scale(1.1); } }
+
+  /* Sticky wilds sit on their own layer so they stay put while the reels spin underneath. */
+  .sticky-layer { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+  .sticky-tile {
+    position: absolute; display: grid; place-items: center; border-radius: 12px; font-size: calc(var(--cellH) * .52); line-height: 1;
+    background: radial-gradient(circle at 50% 40%, #ff9d1c99, #2a1a48 75%);
+    box-shadow: 0 0 0 3px var(--pink), 0 0 18px var(--pink);
+  }
+  .sticky-tile::after { content: "STICKY"; position: absolute; bottom: 6%; font: 900 calc(var(--cellH) * .11)/1 "Cinzel", serif; color: #ffd1e6; letter-spacing: .08em; text-shadow: 0 1px 0 #000, 0 0 8px #000; }
+  .sticky-tile.new { animation: stickIn .55s cubic-bezier(.2,1.6,.4,1); }
+  .sticky-tile.win { animation: symwin .6s ease-in-out infinite alternate; box-shadow: 0 0 0 3px var(--gold), 0 0 24px var(--gold); }
+  @keyframes stickIn { from { transform: scale(2.2); opacity: 0; } }
+  .sym.rushed { animation: rushIn .6s cubic-bezier(.2,1.6,.4,1); }
+  @keyframes rushIn { 0% { transform: scale(.2) rotate(-40deg); filter: brightness(3); } }
+  .float-tag { position: absolute; z-index: 7; pointer-events: none; transform: translate(-50%, -50%); white-space: nowrap;
+    font: 900 clamp(14px, 2.4vw, 20px)/1 "Cinzel", serif; color: #fff; text-shadow: 0 0 10px var(--pink), 0 2px 0 #000; animation: floatUp 1.3s ease-out forwards; }
+  @keyframes floatUp { to { transform: translate(-50%, -150%); opacity: 0; } }
+  .machine.shake { animation: shake .5s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .feat { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .feat .ic { font-size: 30px; }
+  .feat b { display: block; margin: 6px 0 4px; font-size: 15px; }
+  .feat span.when { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .1em; color: var(--gold); margin-bottom: 6px; }
+  .feat p { color: var(--muted); font-size: 13px; line-height: 1.5; }
+  @media (max-width: 900px) { .features { grid-template-columns: 1fr; } }
+
+  .lines-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: visible; }
+  .lines-svg polyline { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 6px currentColor); }
+
+  .win-display {
+    height: 54px; display: grid; place-items: center; margin: 12px 0 6px; font-weight: 800;
+    font-family: "Cinzel", serif; font-size: clamp(18px, 3vw, 26px); letter-spacing: .06em; color: var(--muted);
+  }
+  .win-display.hot { color: var(--gold); text-shadow: 0 0 20px #ffc94d88; }
+
+  /* ---------- Controls ---------- */
+  .controls {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center;
+    background: linear-gradient(180deg, #2a1600, #140a00); border-radius: 18px; padding: 14px 18px;
+    border: 1px solid #5a3a10;
+  }
+  .ctl-group { display: flex; gap: 14px; align-items: center; }
+  .ctl-group.right { justify-content: flex-end; }
+  .meter { min-width: 0; }
+  .meter label { display: block; font-size: 10px; letter-spacing: .18em; color: #c9a36a; font-weight: 700; }
+  .meter output { display: block; font-weight: 800; font-size: 18px; font-variant-numeric: tabular-nums; color: #fff4d6; white-space: nowrap; }
+  .bet-ctl { display: flex; align-items: center; gap: 8px; }
+  .round { width: 36px; height: 36px; border-radius: 50%; font-size: 20px; font-weight: 800; color: #2a1600; background: linear-gradient(180deg, #ffe38a, var(--gold-2)); box-shadow: inset 0 -2px 0 #0003; }
+  .round:disabled, .pill:disabled, .spin-btn:disabled { opacity: .4; cursor: not-allowed; }
+  .pill { padding: 9px 14px; border-radius: 999px; font-weight: 800; font-size: 12px; letter-spacing: .06em; color: #fff4d6; background: #3a2208; border: 1px solid #6a4818; }
+  .pill.on { background: var(--gold); color: #2a1600; border-color: var(--gold); }
+  .spin-btn {
+    width: 96px; height: 96px; border-radius: 50%; position: relative;
+    background: radial-gradient(circle at 50% 35%, #ffe9a0, var(--gold) 40%, var(--gold-2) 70%, var(--gold-deep));
+    box-shadow: 0 0 0 5px #2a1600, 0 0 0 7px var(--gold-2), 0 10px 30px #ff9d1c66, inset 0 -6px 0 #0003;
+    color: #2a1600; font: 900 18px/1 "Cinzel", serif; letter-spacing: .08em; transition: transform .1s;
+  }
+  .spin-btn:active:not(:disabled) { transform: scale(.95); }
+  .spin-btn.spinning { animation: spinglow 1s linear infinite; }
+  .spin-btn small { display: block; font: 700 10px/1.4 "Inter", sans-serif; letter-spacing: .1em; margin-top: 2px; }
+  @keyframes spinglow { 50% { box-shadow: 0 0 0 5px #2a1600, 0 0 0 7px var(--pink), 0 10px 40px #ff3d8b88, inset 0 -6px 0 #0003; } }
+
+  /* ---------- Sections ---------- */
+  section h3.section-title { font-family: "Cinzel", serif; font-weight: 800; font-size: 24px; margin-bottom: 16px; letter-spacing: .04em; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+  .card h4 { font-size: 16px; margin-bottom: 4px; }
+  .card .sub { color: var(--muted); font-size: 13px; margin-bottom: 14px; line-height: 1.5; }
+
+  .paytable { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .pay-item { display: flex; gap: 10px; align-items: center; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .pay-item .e { font-size: 30px; width: 40px; text-align: center; }
+  .pay-item .v { font-size: 12px; color: var(--muted); line-height: 1.5; font-variant-numeric: tabular-nums; }
+  .pay-item .v b { color: var(--text); }
+
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .stat { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .stat span { display: block; font-size: 11px; letter-spacing: .12em; color: var(--muted); font-weight: 700; }
+  .stat b { font-size: 20px; font-variant-numeric: tabular-nums; }
+  .stat b.pos { color: var(--green); } .stat b.neg { color: var(--red); }
+  .sim-row { display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+  .progress { flex: 1; min-width: 120px; height: 8px; border-radius: 99px; background: var(--bg-2); overflow: hidden; border: 1px solid var(--line); }
+  .progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--gold), var(--pink)); }
+  .sim-result { margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+  .sim-result b { color: var(--text); }
+  .rtp-ctl { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-bottom: 14px; }
+  .rtp-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .rtp-head span { font-size: 11px; letter-spacing: .12em; color: var(--muted); font-weight: 700; }
+  .rtp-head b { font-size: 26px; font-variant-numeric: tabular-nums; color: var(--gold); }
+  .rtp-head em { font-style: normal; font-size: 13px; color: var(--muted); }
+  .rtp-ctl input[type=range] { width: 100%; margin: 12px 0 10px; accent-color: var(--gold); }
+  .rtp-presets { display: flex; gap: 6px; flex-wrap: wrap; }
+  .rtp-presets .pill { background: var(--panel-2); border-color: var(--line); }
+  .rtp-presets .pill.on { background: var(--gold); color: #2a1600; border-color: var(--gold); }
+  .rtp-note { font-size: 12px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+  .rtp-note.warn { color: var(--green); }
+  .rtp-chip { display: inline-block; margin-top: 8px; font: 700 11px/1 "Inter", sans-serif; letter-spacing: .12em; color: #c9a36a; border: 1px solid #6a4818; border-radius: 999px; padding: 5px 10px; }
+  .edge-bar { display: flex; height: 26px; border-radius: 8px; overflow: hidden; margin-top: 10px; font-size: 11px; font-weight: 800; }
+  .edge-bar div { display: grid; place-items: center; white-space: nowrap; }
+
+  .lobby { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .game {
+    border-radius: 16px; overflow: hidden; background: var(--panel); border: 1px solid var(--line); transition: transform .2s, border-color .2s;
+  }
+  .game:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .game .art { aspect-ratio: 4/3; display: grid; place-items: center; font-size: 54px; position: relative; }
+  .game .art .tag { position: absolute; top: 10px; left: 10px; font-size: 10px; font-weight: 800; letter-spacing: .1em; padding: 4px 8px; border-radius: 6px; background: #000a; }
+  .game .meta { padding: 12px; }
+  .game .meta b { display: block; font-size: 14px; }
+  .game .meta span { font-size: 12px; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 28px 0 40px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+  footer .badges { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+  footer .badges span { border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; font-weight: 700; font-size: 12px; color: var(--text); }
+
+  /* ---------- Overlays ---------- */
+  .overlay { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; background: #05020acc; backdrop-filter: blur(4px); }
+  .overlay.show { display: grid; }
+  .bigwin { text-align: center; animation: pop .5s cubic-bezier(.2,1.6,.4,1); padding: 16px; }
+  .bigwin h2 {
+    font-family: "Cinzel", serif; font-weight: 900; font-size: clamp(44px, 10vw, 110px); letter-spacing: .04em; line-height: 1;
+    background: linear-gradient(180deg, #fff6d2, var(--gold) 45%, var(--gold-2) 70%, var(--gold-deep)); -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 6px 0 #000) drop-shadow(0 0 30px #ffc94d88);
+    animation: wobble 1.2s ease-in-out infinite;
+  }
+  .bigwin .amt { font: 900 clamp(32px, 6vw, 64px)/1.2 "Cinzel", serif; color: #fff; margin-top: 10px; font-variant-numeric: tabular-nums; text-shadow: 0 0 20px #ffc94d; }
+  .bigwin p { color: var(--muted); margin-top: 16px; font-size: 13px; }
+  @keyframes pop { from { transform: scale(.3); opacity: 0; } }
+  @keyframes wobble { 50% { transform: scale(1.05) rotate(-1deg); } }
+  .fs-intro h2 { background: linear-gradient(180deg, #ffe0f0, var(--pink) 60%, #9b3dff); -webkit-background-clip: text; background-clip: text; }
+
+  .coin-fx { position: fixed; top: -40px; font-size: 28px; z-index: 101; pointer-events: none; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(120px); background: var(--panel-2); border: 1px solid var(--line); padding: 12px 18px; border-radius: 12px; font-weight: 600; font-size: 14px; z-index: 120; transition: transform .3s; max-width: calc(100% - 32px); }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .lobby { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 640px) {
+    .machine { padding: 10px; border-radius: 20px; }
+    .reels-frame { padding: 6px; }
+    .reels { gap: 4px; }
+    .controls { grid-template-columns: 1fr 1fr; grid-template-areas: "spin spin" "left right"; padding: 12px; gap: 12px; }
+    .controls .center { grid-area: spin; display: flex; justify-content: center; }
+    .controls .left { grid-area: left; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .controls .right { grid-area: right; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .spin-btn { width: 80px; height: 80px; font-size: 15px; }
+    .logo { font-size: 17px; }
+    .btn-ghost.hide-sm { display: none; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-strip">DEMO MODE: play-money credits only. No real money, no deposits, no prizes. 18+</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><div class="logo-mark">♛</div><span>AURUM SPINS</span></a>
+    <nav class="nav-links">
+      <a class="active" href="#play">Slots</a>
+      <a href="#lobby">Lobby</a>
+      <a href="#paytable">Paytable</a>
+      <a href="#edge">House Edge</a>
+    </nav>
+    <div class="nav-right">
+      <div class="wallet" title="Demo credits"><i class="coin"></i><span id="walletTop">0</span></div>
+      <button class="btn-ghost hide-sm" id="refillBtn">Refill</button>
+      <button class="icon-btn" id="muteBtn" title="Sound">🔊</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1>Spin the <em>Tiger Temple</em><br>and wake the gold</h1>
+      <p>5 reels, 10 paylines and three features: Tiger Rush random wilds, sticky wilds in free spins, and a bonus where every gold coin adds another spin. Three coins anywhere open the temple.</p>
+      <div class="hero-cta">
+        <a class="btn-gold" href="#play">Play now</a>
+        <a class="btn-ghost" href="#edge" style="padding:14px 22px">How the house wins</a>
+      </div>
+    </div>
+    <div class="jackpot">
+      <small>GRAND JACKPOT (DEMO)</small>
+      <div class="amount" id="jackpot">0</div>
+      <div class="note">Cosmetic ticker. It shows how sites make a jackpot feel close.</div>
+    </div>
+  </section>
+
+  <section class="machine-section" id="play">
+    <div class="machine" id="machine">
+      <div class="machine-title">
+        <h2>TIGER TEMPLE</h2>
+        <div class="bulbs"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <a class="rtp-chip" href="#edge" id="rtpChip">RTP 96.00%</a>
+      </div>
+      <div class="fs-banner" id="fsBanner">FREE SPINS: <span id="fsLeft">0</span> LEFT · STICKY WILDS: <span id="stickyCount">0</span></div>
+      <div class="reels-frame">
+        <div class="reels" id="reels"></div>
+        <div class="sticky-layer" id="stickyLayer"></div>
+        <svg class="lines-svg" id="linesSvg"></svg>
+      </div>
+      <div class="win-display" id="winDisplay">GOOD LUCK</div>
+      <div class="controls">
+        <div class="ctl-group left">
+          <div class="meter"><label>BALANCE</label><output id="balance">0</output></div>
+          <div class="meter"><label>WIN</label><output id="lastWin">0</output></div>
+        </div>
+        <div class="center">
+          <button class="spin-btn" id="spinBtn">SPIN<small>SPACE</small></button>
+        </div>
+        <div class="ctl-group right">
+          <div class="meter">
+            <label>TOTAL BET</label>
+            <div class="bet-ctl">
+              <button class="round" id="betDown">−</button>
+              <output id="bet">10</output>
+              <button class="round" id="betUp">+</button>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
+            <button class="pill" id="autoBtn">AUTO 10</button>
+            <button class="pill" id="turboBtn">TURBO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" style="padding:20px 0 0">
+    <h3 class="section-title">Game features</h3>
+    <div class="features">
+      <div class="feat"><div class="ic">🐯⚡</div><span class="when">REGULAR SPINS · 1 IN 50</span><b>Tiger Rush</b><p>The tiger roars and turns 2 to 4 random symbols into wilds after the reels stop.</p></div>
+      <div class="feat"><div class="ic">🐯📌</div><span class="when">FREE SPINS</span><b>Sticky Wilds</b><p>A tiger that lands on reels 2, 3 or 4 locks in place until the bonus ends. They pile up spin after spin.</p></div>
+      <div class="feat"><div class="ic">🪙➕</div><span class="when">FREE SPINS</span><b>Coin Collector</b><p>Each single coin adds +1 free spin. Three or more retrigger the full 10, 15 or 20.</p></div>
+    </div>
+  </section>
+
+  <section id="paytable" style="padding:20px 0">
+    <div class="grid-2">
+      <div class="card">
+        <h4>Paytable</h4>
+        <div class="sub">Pays are multiples of the line bet (total bet ÷ 10), left to right on any of the 10 lines. The tiger substitutes for everything except the coin.</div>
+        <div class="paytable" id="paytableGrid"></div>
+      </div>
+      <div class="card" id="edge">
+        <h4>How the house wins</h4>
+        <div class="sub">Every symbol has a weight on the reel. The weights and the paytable together fix the <b>RTP</b> (return to player). Whatever is left is the house edge, and it is locked in before anyone spins.</div>
+        <div class="rtp-ctl">
+          <div class="rtp-head">
+            <div><span>GAME RTP</span><br><b id="rtpVal">96.00%</b></div>
+            <em id="rtpEdge">House edge 4.00%</em>
+          </div>
+          <input type="range" id="rtpRange" min="70" max="120" step="0.5" value="96" aria-label="Return to player percentage">
+          <div class="rtp-presets" id="rtpPresets">
+            <button class="pill" data-rtp="85">85%</button>
+            <button class="pill" data-rtp="88">88%</button>
+            <button class="pill" data-rtp="92">92%</button>
+            <button class="pill" data-rtp="94">94%</button>
+            <button class="pill" data-rtp="96">96%</button>
+            <button class="pill" data-rtp="98">98%</button>
+          </div>
+          <div class="rtp-note" id="rtpNote"></div>
+        </div>
+        <div class="stats">
+          <div class="stat"><span>SPINS</span><b id="stSpins">0</b></div>
+          <div class="stat"><span>WAGERED</span><b id="stBet">0</b></div>
+          <div class="stat"><span>RETURNED</span><b id="stWon">0</b></div>
+          <div class="stat"><span>YOUR SESSION RTP</span><b id="stRtp">n/a</b></div>
+        </div>
+        <div class="sim-row">
+          <button class="btn-gold" id="simBtn" style="padding:10px 18px;font-size:13px">Simulate 1,000,000 spins</button>
+          <div class="progress"><i id="simBar"></i></div>
+        </div>
+        <div class="sim-result" id="simResult">Your own session swings wildly. Run a million spins and watch it settle on the number the house designed.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lobby" style="padding:20px 0">
+    <h3 class="section-title">More from the lobby</h3>
+    <div class="lobby">
+      <div class="game"><div class="art" style="background:linear-gradient(135deg,#ff9d1c,#7a2a00)"><span class="tag">PLAYING</span>🐯</div><div class="meta"><b>Tiger Temple</b><span>5×3 · 10 lines</span></div></div>
+      <div class="game"><div class="art" style="background:linear-gradient(135deg,#3d7bff,#1a0d5c)"><span class="tag">SOON</span>⚡</div><div class="meta"><b>Storm Titans</b><span>6×5 · cluster pays</span></div></div>
+      <div class="game"><div class="art" style="background:linear-gradient(135deg,#ff3d8b,#4a0030)"><span class="tag">SOON</span>🍬</div><div class="meta"><b>Sugar Cascade</b><span>tumble reels</span></div></div>
+      <div class="game"><div class="art" style="background:linear-gradient(135deg,#2fe39a,#003d2a)"><span class="tag">SOON</span>🐉</div><div class="meta"><b>Jade Dragon</b><span>243 ways</span></div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="badges"><span>18+</span><span>DEMO ONLY</span><span>NO REAL MONEY</span><span>RNG: crypto.getRandomValues</span></div>
+    Aurum Spins is a made-up brand for a front-end demo. Credits have no cash value and cannot be bought or withdrawn.
+    Real-money gambling is built so the house wins over time. If gambling stops being fun, contact a local support service.
+  </div>
+</footer>
+
+<div class="overlay" id="bigWin"><div class="bigwin"><h2 id="bigWinTitle">BIG WIN</h2><div class="amt" id="bigWinAmt">0</div><p>Tap to continue</p></div></div>
+<div class="overlay" id="fsIntro"><div class="bigwin fs-intro"><h2>FREE SPINS</h2><div class="amt" id="fsIntroAmt">10</div><p>Tigers on reels 2 to 4 stick. Every coin adds a spin. Tap to start</p></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ENGINE-START (pure game math: no DOM, so it can be tested outside the browser) */
+const Engine = (() => {
+  // Weights decide how often each symbol lands. They set the RTP together with the paytable.
+  const SYMBOLS = [
+    { id: 'cherry',  e: '🍒', name: 'Cherry',  pay: { 3: 6, 4: 17, 5: 45 },   w: 24, c: '#ff4d6d44' },
+    { id: 'lemon',   e: '🍋', name: 'Lemon',   pay: { 3: 6, 4: 17, 5: 45 },   w: 24, c: '#ffe04d44' },
+    { id: 'melon',   e: '🍉', name: 'Melon',   pay: { 3: 7, 4: 25, 5: 60 },   w: 20, c: '#2fe39a44' },
+    { id: 'bell',    e: '🔔', name: 'Bell',    pay: { 3: 9, 4: 30, 5: 80 },   w: 16, c: '#ffc94d44' },
+    { id: 'star',    e: '⭐', name: 'Star',    pay: { 3: 15, 4: 50, 5: 125 },  w: 12, c: '#fff4a044' },
+    { id: 'diamond', e: '💎', name: 'Diamond', pay: { 3: 25, 4: 90, 5: 300 },  w: 8,  c: '#4dc8ff44' },
+    { id: 'seven',   e: '7️⃣', name: 'Seven',   pay: { 3: 50, 4: 180, 5: 600 },  w: 5,  c: '#ff3d8b44' },
+    { id: 'wild',    e: '🐯', name: 'Tiger Wild', pay: { 3: 90, 4: 450, 5: 1500 }, w: 3, wild: true },
+    { id: 'scatter', e: '🪙', name: 'Gold Coin', w: 3, scatter: true },
+  ];
+  const BY_ID = Object.fromEntries(SYMBOLS.map(s => [s.id, s]));
+  const TOTAL_W = SYMBOLS.reduce((a, s) => a + s.w, 0);
+
+  // Scatter pays are multiples of TOTAL bet, anywhere on screen.
+  const SCATTER = { 3: { pay: 1, fs: 10 }, 4: { pay: 6, fs: 15 }, 5: { pay: 30, fs: 20 } };
+  const FS_MULT = 1;
+  const REELS = 5, ROWS = 3;
+
+  // Row index per reel for each of the 10 lines.
+  const LINES = [
+    [1,1,1,1,1], [0,0,0,0,0], [2,2,2,2,2], [0,1,2,1,0], [2,1,0,1,2],
+    [0,0,1,2,2], [2,2,1,0,0], [1,0,0,0,1], [1,2,2,2,1], [0,1,1,1,0],
+  ];
+
+  // Cryptographic RNG, like certified casino RNGs, rather than Math.random.
+  const buf = new Uint32Array(1);
+  function rand() { crypto.getRandomValues(buf); return buf[0] / 4294967296; }
+
+  function randomSymbol() {
+    let r = rand() * TOTAL_W;
+    for (const s of SYMBOLS) { if ((r -= s.w) < 0) return s.id; }
+    return SYMBOLS[0].id;
+  }
+
+  // grid[reel][row]
+  function spin() {
+    return Array.from({ length: REELS }, () => Array.from({ length: ROWS }, randomSymbol));
+  }
+
+  // Every payout is multiplied by payScale. RTP is linear in the payouts, so scaling them
+  // hits any target RTP exactly without touching the reel weights or the hit rate.
+  let payScale = 1;
+  const money = x => Math.round(x * 100) / 100;
+
+  // Best pay on one line, in line-bet units (before payScale).
+  function linePay(cells) {
+    let wc = 0;
+    while (wc < REELS && BY_ID[cells[wc]].wild) wc++;
+    let best = { win: wc >= 3 ? BY_ID.wild.pay[wc] : 0, sym: 'wild', count: wc };
+    const target = cells.find(s => !BY_ID[s].wild);
+    if (target && !BY_ID[target].scatter) {
+      let n = 0;
+      while (n < REELS && (cells[n] === target || BY_ID[cells[n]].wild)) n++;
+      const w = n >= 3 ? BY_ID[target].pay[n] : 0;
+      if (w > best.win) best = { win: w, sym: target, count: n };
+    }
+    return best;
+  }
+
+  function evaluate(grid, totalBet, mult = 1) {
+    const lineBet = totalBet / LINES.length;
+    const lines = [];
+    LINES.forEach((line, idx) => {
+      const best = linePay(line.map((row, reel) => grid[reel][row]));
+      if (best.win > 0) lines.push({ idx, line, sym: best.sym, count: best.count, win: money(best.win * lineBet * mult * payScale) });
+    });
+
+    const positions = [];
+    grid.forEach((col, reel) => col.forEach((s, row) => { if (BY_ID[s].scatter) positions.push([reel, row]); }));
+    const sc = SCATTER[Math.min(positions.length, 5)];
+    const scatter = { count: positions.length, positions, win: sc ? money(sc.pay * totalBet * mult * payScale) : 0, freeSpins: sc ? sc.fs : 0 };
+
+    const total = money(lines.reduce((a, l) => a + l.win, 0) + scatter.win);
+    return { lines, scatter, total };
+  }
+
+  /* ----- Features ----- */
+  // Tiger Rush: on a paid spin the tiger sometimes turns a few random symbols wild.
+  const RUSH = { chance: 1 / 50, min: 2, max: 4 };
+  // Only tigers on the middle three reels stick, so a bonus can't fill the whole screen.
+  const STICKY_REELS = [1, 2, 3];
+  // Safety cap so coin collecting can never make one bonus run forever.
+  const MAX_FS = 100;
+  const randInt = (a, b) => a + Math.floor(rand() * (b - a + 1));
+
+  // Paid spin. `before` is what the reels land on, `grid` is after Tiger Rush.
+  function baseSpin() {
+    const before = spin();
+    const grid = before.map(col => col.slice());
+    const rush = [];
+    if (rand() < RUSH.chance) {
+      const open = [];
+      grid.forEach((col, reel) => col.forEach((s, row) => { if (!BY_ID[s].wild && !BY_ID[s].scatter) open.push([reel, row]); }));
+      let n = Math.min(randInt(RUSH.min, RUSH.max), open.length);
+      while (n-- > 0) {
+        const [pos] = open.splice(Math.floor(rand() * open.length), 1);
+        grid[pos[0]][pos[1]] = 'wild';
+        rush.push(pos);
+      }
+    }
+    return { before, grid, rush };
+  }
+
+  // Free spin with Sticky Wilds. `sticky` is a Set of "reel,row" keys that stays wild for the
+  // rest of the bonus; any new tiger that lands is added to it.
+  function freeSpin(sticky) {
+    const grid = spin();
+    const fresh = [];
+    grid.forEach((col, reel) => col.forEach((s, row) => {
+      const key = reel + ',' + row;
+      if (sticky.has(key)) col[row] = 'wild';
+      else if (BY_ID[s].wild && STICKY_REELS.includes(reel)) fresh.push([reel, row]);
+    }));
+    fresh.forEach(([reel, row]) => sticky.add(reel + ',' + row));
+    return { grid, fresh };
+  }
+
+  // Coin Collector: during free spins 3+ coins retrigger in full, and 1 or 2 coins
+  // still add one spin each.
+  function extraSpins(coins) { return coins >= 3 ? SCATTER[Math.min(coins, 5)].fs : coins; }
+
+  // One paid spin plus the whole bonus it may trigger. Returns total paid out.
+  // The page's spin flow follows these same steps, one spin at a time.
+  function playRound(bet) {
+    let r = evaluate(baseSpin().grid, bet, 1);
+    let won = r.total, fs = r.scatter.freeSpins, played = 0;
+    const sticky = new Set();
+    while (fs > 0 && played < MAX_FS) {
+      fs--; played++;
+      r = evaluate(freeSpin(sticky).grid, bet, FS_MULT);
+      won += r.total;
+      fs += extraSpins(r.scatter.count);
+    }
+    return won;
+  }
+
+  // RTP at payScale = 1. Sticky wilds carry state from spin to spin, so this can't be
+  // enumerated exactly any more; like studios do for complex features, it is measured by
+  // simulation. Re-run `node measure-rtp.js` after changing any weight, pay or feature.
+  const BASE_RTP = 95.35; // 40M rounds, ±0.24 at 95% confidence
+
+  function setRTP(target) { payScale = target / BASE_RTP; }
+  function getRTP() { return BASE_RTP * payScale; }
+  function scaledPay(x) { return money(x * payScale); }
+
+  return { SYMBOLS, BY_ID, LINES, SCATTER, FS_MULT, REELS, ROWS, RUSH, MAX_FS, BASE_RTP,
+    randomSymbol, spin, baseSpin, freeSpin, extraSpins, evaluate, playRound, setRTP, getRTP, scaledPay };
+})();
+/* ENGINE-END */
+
+if (typeof window !== 'undefined') (() => {
+  const $ = id => document.getElementById(id);
+  const BETS = [1, 2, 5, 10, 20, 50, 100, 200, 500];
+  const LINE_COLORS = ['#ffc94d','#ff3d8b','#2fe39a','#4dc8ff','#b36bff','#ff7a3d','#fff04d','#3dffd8','#ff4d6d','#9dff3d'];
+  // Scaled payouts can land on fractions of a credit, so show up to 2 decimals.
+  const fmt = n => (Math.round(n * 100) / 100).toLocaleString('en-US', { maximumFractionDigits: 2 });
+
+  // Browser storage is only a per-viewer convenience here, so every access is guarded.
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  };
+
+  const state = {
+    balance: store.get('aurum.balance', 1000),
+    betIdx: store.get('aurum.betIdx', 3),
+    stats: store.get('aurum.stats', { spins: 0, bet: 0, won: 0 }),
+    grid: Engine.spin(),
+    spinning: false, turbo: false, auto: 0, fs: 0, fsTotalWin: 0,
+    sticky: new Set(), fsPlayed: 0,
+    muted: store.get('aurum.muted', false),
+    rtp: store.get('aurum.rtp', 96),
+    cycleTimer: null,
+  };
+  const bet = () => BETS[state.betIdx];
+
+  /* ---------- Sound (Web Audio, no files) ---------- */
+  let ac;
+  function tone(freq, dur = .12, type = 'sine', vol = .15, when = 0) {
+    if (state.muted) return;
+    try {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      const t = ac.currentTime + when, o = ac.createOscillator(), g = ac.createGain();
+      o.type = type; o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      o.connect(g).connect(ac.destination); o.start(t); o.stop(t + dur);
+    } catch {}
+  }
+  const sfx = {
+    stop: () => tone(180, .08, 'square', .06),
+    click: () => tone(600, .05, 'triangle', .08),
+    win: () => [523, 659, 784].forEach((f, i) => tone(f, .18, 'triangle', .12, i * .08)),
+    big: () => [523, 659, 784, 1047, 784, 1047, 1319].forEach((f, i) => tone(f, .25, 'sawtooth', .07, i * .11)),
+    tease: () => tone(880, .15, 'sine', .08),
+    roar: () => { tone(110, .6, 'sawtooth', .14); tone(82, .7, 'sawtooth', .12, .08); },
+    stick: () => { tone(1200, .1, 'square', .05); tone(1600, .14, 'square', .05, .06); },
+    coin: () => { tone(1320, .08, 'triangle', .1); tone(1760, .14, 'triangle', .1, .07); },
+  };
+
+  /* ---------- Reels ---------- */
+  const reelsEl = $('reels');
+  const reelEls = [];
+  function symHTML(id) {
+    const s = Engine.BY_ID[id];
+    const cls = s.wild ? ' wild' : s.scatter ? ' scatter' : '';
+    return `<div class="cell"><div class="sym${cls}" style="--c:${s.c || 'transparent'}">${s.e}</div></div>`;
+  }
+  for (let i = 0; i < Engine.REELS; i++) {
+    const r = document.createElement('div');
+    r.className = 'reel';
+    r.innerHTML = `<div class="strip"></div>`;
+    reelsEl.appendChild(r);
+    reelEls.push(r);
+  }
+  function renderReel(i, syms) {
+    const strip = reelEls[i].firstElementChild;
+    strip.style.transition = 'none';
+    strip.style.transform = 'translateY(0)';
+    strip.innerHTML = syms.map(symHTML).join('');
+  }
+  function renderAll() { state.grid.forEach((col, i) => renderReel(i, col)); }
+
+  function sizeCells() {
+    const w = reelEls[0].getBoundingClientRect().width;
+    const h = Math.max(62, Math.min(130, w * 0.95, (window.innerHeight - 260) / 3));
+    document.documentElement.style.setProperty('--cellH', h + 'px');
+  }
+
+  // Strip is laid out top to bottom as [final 3][filler][current 3]. It starts showing the
+  // current symbols at the bottom and slides down until the final 3 are in view.
+  function spinReel(i, finalSyms, duration, tease) {
+    return new Promise(resolve => {
+      const reel = reelEls[i], strip = reel.firstElementChild;
+      const cellH = reel.clientHeight / Engine.ROWS;
+      const fillerCount = Math.round(duration / 45) + 6;
+      const filler = Array.from({ length: fillerCount }, Engine.randomSymbol);
+      const syms = [...finalSyms, ...filler, ...state.grid[i]];
+      strip.style.transition = 'none';
+      strip.innerHTML = syms.map(symHTML).join('');
+      strip.style.transform = `translateY(${-(syms.length - 3) * cellH}px)`;
+      strip.classList.add('blur');
+      if (tease) reel.classList.add('anticipate');
+      strip.getBoundingClientRect(); // force layout so the transition runs from the start position
+      strip.style.transition = `transform ${duration}ms cubic-bezier(.25,.1,.3,1.06)`;
+      strip.style.transform = 'translateY(0)';
+      setTimeout(() => strip.classList.remove('blur'), duration * 0.82);
+      setTimeout(() => {
+        reel.classList.remove('anticipate');
+        renderReel(i, finalSyms);
+        sfx.stop();
+        resolve();
+      }, duration + 20);
+    });
+  }
+
+  /* ---------- Win presentation ---------- */
+  const svg = $('linesSvg');
+  function symEl(reel, row) { return reelEls[reel].querySelectorAll('.sym')[row]; }
+  function clearWins() {
+    clearInterval(state.cycleTimer);
+    reelsEl.classList.remove('has-win');
+    reelsEl.querySelectorAll('.sym.win').forEach(e => e.classList.remove('win'));
+    stickyLayer.querySelectorAll('.sticky-tile.win').forEach(e => e.classList.remove('win'));
+    svg.innerHTML = '';
+  }
+
+  /* ---------- Features ---------- */
+  const stickyLayer = $('stickyLayer');
+  const frameEl = document.querySelector('.reels-frame');
+  function cellBox(reel, row, relTo) {
+    const r = symEl(reel, row).getBoundingClientRect(), b = relTo.getBoundingClientRect();
+    return { left: r.left - b.left, top: r.top - b.top, width: r.width, height: r.height };
+  }
+  // Only call once the reels have stopped: it measures the landed cells.
+  function renderSticky(fresh = []) {
+    const freshKeys = new Set(fresh.map(p => p.join(',')));
+    stickyLayer.innerHTML = [...state.sticky].map(key => {
+      const [reel, row] = key.split(',').map(Number);
+      const c = cellBox(reel, row, stickyLayer);
+      return `<div class="sticky-tile${freshKeys.has(key) ? ' new' : ''}" data-key="${key}" style="left:${c.left}px;top:${c.top}px;width:${c.width}px;height:${c.height}px">🐯</div>`;
+    }).join('');
+  }
+  function floatTag(reel, row, text) {
+    const c = cellBox(reel, row, frameEl), el = document.createElement('div');
+    el.className = 'float-tag';
+    el.textContent = text;
+    el.style.left = c.left + c.width / 2 + 'px';
+    el.style.top = c.top + c.height / 2 + 'px';
+    frameEl.appendChild(el);
+    setTimeout(() => el.remove(), 1400);
+  }
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  // Reels landed on the pre-rush symbols; now flip the chosen cells to tigers one by one.
+  async function tigerRush(rush) {
+    setWinText('TIGER RUSH!', true);
+    sfx.roar();
+    const m = $('machine');
+    m.classList.remove('shake'); void m.offsetWidth; m.classList.add('shake');
+    await sleep(state.turbo ? 200 : 500);
+    for (const [reel, row] of rush) {
+      const el = symEl(reel, row);
+      el.className = 'sym wild rushed';
+      el.style.setProperty('--c', 'transparent');
+      el.textContent = Engine.BY_ID.wild.e;
+      sfx.stick();
+      await sleep(state.turbo ? 90 : 220);
+    }
+    await sleep(state.turbo ? 150 : 350);
+  }
+  function endBonus() {
+    state.sticky = new Set();
+    state.fsPlayed = 0;
+    stickyLayer.innerHTML = '';
+  }
+  function drawLines(lines) {
+    const box = svg.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+    svg.innerHTML = lines.map(l => {
+      const pts = l.line.map((row, reel) => {
+        const r = symEl(reel, row).getBoundingClientRect();
+        return `${r.left - box.left + r.width / 2},${r.top - box.top + r.height / 2}`;
+      }).join(' ');
+      const col = LINE_COLORS[l.idx];
+      return `<polyline points="${pts}" stroke="${col}" style="color:${col}"/>`;
+    }).join('');
+  }
+  function highlight(lines, scatter) {
+    reelsEl.querySelectorAll('.sym.win').forEach(e => e.classList.remove('win'));
+    lines.forEach(l => l.line.slice(0, l.count).forEach((row, reel) => symEl(reel, row).classList.add('win')));
+    if (scatter && scatter.win) scatter.positions.forEach(([reel, row]) => symEl(reel, row).classList.add('win'));
+    stickyLayer.querySelectorAll('.sticky-tile').forEach(t => t.classList.remove('win'));
+    lines.forEach(l => l.line.slice(0, l.count).forEach((row, reel) => {
+      const t = stickyLayer.querySelector(`[data-key="${reel},${row}"]`);
+      if (t) t.classList.add('win');
+    }));
+    reelsEl.classList.add('has-win');
+    drawLines(lines);
+  }
+  function showWins(res, isFree) {
+    if (!res.total) return;
+    highlight(res.lines, res.scatter);
+    // Not during free spins: the last one would overwrite the bonus total with a line.
+    if (res.lines.length > 1 && !state.auto && !isFree) {
+      // After showing everything once, step through each line so players can read them.
+      let k = 0;
+      state.cycleTimer = setInterval(() => {
+        const l = res.lines[k++ % res.lines.length];
+        highlight([l]);
+        setWinText(`LINE ${l.idx + 1}: ${l.count}× ${Engine.BY_ID[l.sym].e} PAYS ${fmt(l.win)}`, true);
+      }, 1400);
+    }
+  }
+
+  function setWinText(t, hot) { const el = $('winDisplay'); el.textContent = t; el.classList.toggle('hot', !!hot); }
+  function countUp(el, to, ms = 900) {
+    const start = performance.now();
+    return new Promise(res => {
+      (function step(now) {
+        const p = Math.min(1, (now - start) / ms);
+        el.textContent = p < 1 ? fmt(Math.floor(to * (1 - Math.pow(1 - p, 3)))) : fmt(to);
+        p < 1 ? requestAnimationFrame(step) : res();
+      })(start);
+    });
+  }
+  function coinRain(n = 40) {
+    for (let i = 0; i < n; i++) {
+      const c = document.createElement('div');
+      c.className = 'coin-fx';
+      c.textContent = Math.random() < .8 ? '🪙' : '💎';
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.animationDuration = 1.8 + Math.random() * 1.8 + 's';
+      c.style.animationDelay = Math.random() * .8 + 's';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 4500);
+    }
+  }
+  function waitOverlay(id, ms) {
+    return new Promise(res => {
+      const o = $(id);
+      o.classList.add('show');
+      const done = () => { o.classList.remove('show'); o.removeEventListener('click', done); clearTimeout(t); res(); };
+      const t = setTimeout(done, ms);
+      o.addEventListener('click', done);
+    });
+  }
+  async function bigWin(amount, x) {
+    $('bigWinTitle').textContent = x >= 100 ? 'EPIC WIN' : x >= 40 ? 'MEGA WIN' : 'BIG WIN';
+    sfx.big(); coinRain(x >= 40 ? 80 : 45);
+    const p = waitOverlay('bigWin', 4200);
+    countUp($('bigWinAmt'), amount, 2200);
+    await p;
+  }
+
+  /* ---------- UI sync ---------- */
+  function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2600); }
+  function syncUI() {
+    $('balance').textContent = fmt(state.balance);
+    $('walletTop').textContent = fmt(state.balance);
+    $('bet').textContent = fmt(bet());
+    $('betDown').disabled = state.spinning || state.fs || state.betIdx === 0;
+    $('betUp').disabled = state.spinning || state.fs || state.betIdx === BETS.length - 1;
+    $('spinBtn').disabled = state.spinning && !state.auto;
+    $('spinBtn').classList.toggle('spinning', state.spinning);
+    $('spinBtn').firstChild.textContent = state.auto ? 'STOP' : state.fs ? 'FREE' : 'SPIN';
+    $('autoBtn').classList.toggle('on', state.auto > 0);
+    $('autoBtn').textContent = state.auto ? `AUTO ${state.auto}` : 'AUTO 10';
+    $('turboBtn').classList.toggle('on', state.turbo);
+    $('muteBtn').textContent = state.muted ? '🔇' : '🔊';
+    $('machine').classList.toggle('freespins', state.fs > 0);
+    $('fsLeft').textContent = state.fs;
+    $('stickyCount').textContent = state.sticky.size;
+    lockRTP();
+    const s = state.stats;
+    $('stSpins').textContent = fmt(s.spins);
+    $('stBet').textContent = fmt(s.bet);
+    $('stWon').textContent = fmt(s.won);
+    const rtp = s.bet ? (s.won / s.bet) * 100 : null;
+    const el = $('stRtp');
+    el.textContent = rtp === null ? 'n/a' : rtp.toFixed(1) + '%';
+    el.className = rtp === null ? '' : rtp >= 100 ? 'pos' : 'neg';
+    store.set('aurum.balance', state.balance);
+    store.set('aurum.betIdx', state.betIdx);
+    store.set('aurum.stats', state.stats);
+  }
+
+  /* ---------- Spin flow ---------- */
+  async function spin() {
+    if (state.spinning) return;
+    const isFree = state.fs > 0;
+    const b = bet();
+    if (!isFree && state.balance < b) {
+      state.auto = 0; syncUI();
+      toast('Not enough demo credits. Lower the bet or hit Refill.');
+      return;
+    }
+    clearWins();
+    state.spinning = true;
+    if (isFree) { state.fs--; state.fsPlayed++; }
+    else { state.balance -= b; state.stats.spins++; state.stats.bet += b; }
+    $('lastWin').textContent = '0';
+    setWinText(isFree ? 'FREE SPIN' : 'SPINNING…');
+    syncUI();
+
+    // Free spins add sticky wilds; paid spins may carry a Tiger Rush. The reels land on
+    // `before`, and features then turn it into `grid`, the result that actually pays.
+    let before, grid, rush = [], fresh = [];
+    if (isFree) { ({ grid, fresh } = Engine.freeSpin(state.sticky)); before = grid; }
+    else ({ before, grid, rush } = Engine.baseSpin());
+    const res = Engine.evaluate(grid, b, isFree ? Engine.FS_MULT : 1);
+
+    // Reels stop left to right. Two coins already showing makes the next reels spin
+    // longer and glow: the "near miss" tease real slots use to build tension.
+    const base = state.turbo ? 350 : 800, step = state.turbo ? 120 : 260;
+    let scattersSoFar = 0, extra = 0;
+    const stops = [];
+    for (let i = 0; i < Engine.REELS; i++) {
+      const tease = scattersSoFar >= 2;
+      if (tease) extra += state.turbo ? 400 : 900;
+      stops.push(spinReel(i, before[i], base + step * i + extra, tease));
+      if (tease) setTimeout(sfx.tease, base + step * i + extra - 300);
+      scattersSoFar += before[i].filter(s => Engine.BY_ID[s].scatter).length;
+    }
+    await Promise.all(stops);
+    state.grid = grid;
+
+    if (rush.length) await tigerRush(rush);
+    if (fresh.length) {
+      renderSticky(fresh);
+      sfx.stick();
+      fresh.forEach(([reel, row]) => floatTag(reel, row, 'STICKY!'));
+      syncUI();
+      await sleep(state.turbo ? 250 : 600);
+    }
+    // Coin Collector: 1 or 2 coins in free spins still add a spin each.
+    if (isFree && res.scatter.count > 0 && res.scatter.count < 3) {
+      state.fs += Engine.extraSpins(res.scatter.count);
+      res.scatter.positions.forEach(([reel, row]) => floatTag(reel, row, '+1 SPIN'));
+      sfx.coin();
+      syncUI();
+    }
+
+    if (res.total > 0) {
+      state.balance += res.total;
+      state.stats.won += res.total;
+      if (state.fs > 0 || isFree) state.fsTotalWin += res.total;
+      showWins(res, isFree);
+      const x = res.total / b;
+      if (x >= 15) await bigWin(res.total, x);
+      else sfx.win();
+      setWinText(`WIN ${fmt(res.total)}`, true);
+      countUp($('lastWin'), res.total, 600);
+    } else {
+      setWinText(isFree ? `FREE SPINS LEFT: ${state.fs}` : 'SPIN AGAIN');
+    }
+    syncUI();
+
+    if (res.scatter.freeSpins) {
+      const wasInFs = isFree;
+      state.fs += res.scatter.freeSpins;
+      if (!wasInFs) { state.fsTotalWin = 0; endBonus(); }
+      $('fsIntroAmt').textContent = wasInFs ? `+${res.scatter.freeSpins}` : res.scatter.freeSpins;
+      sfx.big(); coinRain(30);
+      await waitOverlay('fsIntro', 3500);
+    }
+
+    // Same safety cap as Engine.playRound, so the page and the simulator agree.
+    if (isFree && state.fsPlayed >= Engine.MAX_FS) state.fs = 0;
+
+    state.spinning = false;
+    const endedFs = isFree && state.fs === 0;
+    syncUI();
+
+    if (endedFs) {
+      if (state.fsTotalWin > 0) await bigWin(state.fsTotalWin, Math.max(15, state.fsTotalWin / b));
+      clearWins();
+      endBonus();
+      syncUI();
+      setWinText(`FREE SPINS TOTAL: ${fmt(state.fsTotalWin)}`, true);
+    }
+
+    // Keep going automatically through free spins and auto-play.
+    if (state.fs > 0) setTimeout(spin, state.turbo ? 250 : 700);
+    else if (state.auto > 0) {
+      state.auto--; syncUI();
+      if (state.auto > 0) setTimeout(spin, res.total ? 900 : 350);
+    }
+  }
+
+  /* ---------- House-edge simulator ---------- */
+  function simulate() {
+    const btn = $('simBtn'), bar = $('simBar'), out = $('simResult');
+    const N = 1_000_000, CHUNK = 20000, b = 10;
+    let done = 0, paid = 0, hits = 0, maxWin = 0;
+    const target = Engine.getRTP();
+    btn.disabled = true;
+    out.textContent = 'Running…';
+    (function chunk() {
+      const end = Math.min(N, done + CHUNK);
+      for (; done < end; done++) {
+        const w = Engine.playRound(b);
+        paid += w; if (w > 0) hits++; if (w > maxWin) maxWin = w;
+      }
+      bar.style.width = (done / N * 100) + '%';
+      if (done < N) return setTimeout(chunk, 0);
+      const rtp = paid / (N * b) * 100, edge = 100 - rtp;
+      const kept = Math.max(0, Math.min(100, rtp));
+      const barHTML = edge >= 0
+        ? `<div style="width:${kept}%;background:var(--green);color:#002a1a">PAID BACK ${rtp.toFixed(1)}%</div><div style="width:${Math.max(edge, 3)}%;background:var(--red)">${edge.toFixed(1)}%</div>`
+        : `<div style="width:100%;background:var(--green);color:#002a1a">PLAYERS AHEAD BY ${(-edge).toFixed(1)}%</div>`;
+      out.innerHTML = `Over <b>${fmt(N)}</b> spins at bet 10: players put in <b>${fmt(N * b)}</b> and got back <b>${fmt(paid)}</b>.<br>
+        Target RTP <b>${target.toFixed(2)}%</b> · measured <b>${rtp.toFixed(2)}%</b> · house edge <b>${edge.toFixed(2)}%</b> · hit rate <b>${(hits / N * 100).toFixed(1)}%</b> · best round <b>${fmt(maxWin / b)}x</b>
+        <div class="edge-bar">${barHTML}</div>
+        The hit rate stays the same at every RTP, because the reels are unchanged. Only the size of each win moves, which is why players rarely notice which version they are playing.`;
+      btn.disabled = false;
+    })();
+  }
+
+  /* ---------- Paytable ---------- */
+  function renderPaytable() {
+    $('paytableGrid').innerHTML = Engine.SYMBOLS.map(s => {
+      const v = s.scatter
+        ? Object.entries(Engine.SCATTER).map(([n, x]) => `${n}× <b>${fmt(Engine.scaledPay(x.pay))}x bet</b> + ${x.fs} FS`).join('<br>')
+        : Object.entries(s.pay).map(([n, x]) => `${n}× <b>${fmt(Engine.scaledPay(x))}</b>`).join('<br>');
+      return `<div class="pay-item"><div class="e">${s.e}</div><div class="v"><b>${s.name}</b><br>${v}</div></div>`;
+    }).join('');
+  }
+
+  /* ---------- RTP setting ---------- */
+  // Real studios certify several versions of one game (for example 88 / 92 / 94 / 96%)
+  // and the casino operator picks which one to run. This is that operator switch.
+  function applyRTP(v, fromSlider) {
+    state.rtp = Math.max(70, Math.min(120, Number(v)));
+    Engine.setRTP(state.rtp);
+    store.set('aurum.rtp', state.rtp);
+    const edge = 100 - state.rtp;
+    $('rtpVal').textContent = state.rtp.toFixed(2) + '%';
+    $('rtpChip').textContent = 'RTP ' + state.rtp.toFixed(2) + '%';
+    $('rtpEdge').textContent = edge >= 0 ? `House edge ${edge.toFixed(2)}%` : `Player edge ${(-edge).toFixed(2)}%`;
+    if (!fromSlider) $('rtpRange').value = state.rtp;
+    document.querySelectorAll('#rtpPresets .pill').forEach(p => p.classList.toggle('on', Number(p.dataset.rtp) === state.rtp));
+    const note = $('rtpNote');
+    note.classList.toggle('warn', state.rtp > 100);
+    note.textContent = state.rtp > 100
+      ? 'Above 100% the player wins over time. No real casino would ever run this.'
+      : `Every 100 credits wagered returns ${state.rtp.toFixed(2)} on average. Every pay is ×${(state.rtp / Engine.BASE_RTP).toFixed(3)} of the base paytable (${Engine.BASE_RTP.toFixed(2)}%).`;
+    renderPaytable();
+  }
+  function lockRTP() {
+    const locked = state.spinning || state.fs > 0;
+    $('rtpRange').disabled = locked;
+    document.querySelectorAll('#rtpPresets .pill').forEach(p => p.disabled = locked);
+  }
+
+  /* ---------- Jackpot ticker (cosmetic) ---------- */
+  let jp = 1_284_503 + Math.random() * 5000;
+  setInterval(() => { jp += Math.random() * 37; $('jackpot').textContent = fmt(Math.round(jp)); }, 120);
+
+  /* ---------- Events ---------- */
+  $('spinBtn').onclick = () => {
+    if (state.auto) { state.auto = 0; syncUI(); return; }
+    sfx.click(); spin();
+  };
+  $('betUp').onclick = () => { state.betIdx = Math.min(BETS.length - 1, state.betIdx + 1); sfx.click(); syncUI(); };
+  $('betDown').onclick = () => { state.betIdx = Math.max(0, state.betIdx - 1); sfx.click(); syncUI(); };
+  $('autoBtn').onclick = () => {
+    sfx.click();
+    if (state.auto) { state.auto = 0; syncUI(); return; }
+    state.auto = 10; syncUI();
+    if (!state.spinning && !state.fs) spin();
+  };
+  $('turboBtn').onclick = () => { state.turbo = !state.turbo; sfx.click(); syncUI(); };
+  $('muteBtn').onclick = () => { state.muted = !state.muted; store.set('aurum.muted', state.muted); syncUI(); };
+  $('refillBtn').onclick = () => {
+    state.balance = 1000; state.stats = { spins: 0, bet: 0, won: 0 };
+    syncUI(); toast('Demo balance reset to 1,000 credits.');
+  };
+  $('simBtn').onclick = simulate;
+  $('rtpRange').oninput = e => applyRTP(e.target.value, true);
+  $('rtpPresets').onclick = e => { const b = e.target.closest('[data-rtp]'); if (b) { sfx.click(); applyRTP(b.dataset.rtp); } };
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space' && e.target === document.body) { e.preventDefault(); $('spinBtn').click(); }
+  });
+  window.addEventListener('resize', () => { sizeCells(); clearWins(); if (!state.spinning) renderSticky(); });
+
+  applyRTP(state.rtp);
+  sizeCells();
+  renderAll();
+  syncUI();
+  setWinText('GOOD LUCK');
+})();
+</script>
+</body>
+</html>
